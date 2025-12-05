@@ -8,9 +8,15 @@ SRC         := src/main.c \
                src/stack_ops_basic.c \
                src/parse.c \
                src/checks.c \
-			   src/ops_printed.c \
 			   src/small_sort.c \
        		   src/sort_radix.c \
+			   src/ps_atol.c \
+			   src/ops_utils.c \
+			   src/ops_swap_push.c \
+			   src/ops_rotate.c \
+    		   src/ops_reverse_rotate.c \
+			   src/split_ws.c \
+			   src/run_sort.c \
 
 OBJ         := $(SRC:.c=.o)
 

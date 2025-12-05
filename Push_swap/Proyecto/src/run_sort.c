@@ -1,47 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checks.c                                           :+:      :+:    :+:   */
+/*   run_sort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomamart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 17:50:36 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/05 17:50:38 by tomamart         ###   ########.fr       */
+/*   Created: 2025/12/05 18:02:11 by tomamart          #+#    #+#             */
+/*   Updated: 2025/12/05 18:02:14 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	has_duplicates(t_stack *a)
+void	run_sort(t_stack *a, t_stack *b)
 {
-	t_node	*i;
-	t_node	*j;
-
-	i = a->top;
-	while (i)
+	if (a->size == 2)
+		sort_2(a);
+	else if (a->size == 3)
+		sort_3(a);
+	else if (a->size <= 5)
+		sort_5(a, b);
+	else
 	{
-		j = i->next;
-		while (j)
-		{
-			if (j->value == i->value)
-				return (1);
-			j = j->next;
-		}
-		i = i->next;
+		index_compress(a);
+		sort_radix(a, b);
 	}
-	return (0);
-}
-
-int	already_sorted(t_stack *a)
-{
-	t_node	*n;
-
-	n = a->top;
-	while (n && n->next)
-	{
-		if (n->value > n->next->value)
-			return (0);
-		n = n->next;
-	}
-	return (1);
 }

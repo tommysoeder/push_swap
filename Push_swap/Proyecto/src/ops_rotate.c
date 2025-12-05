@@ -1,47 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checks.c                                           :+:      :+:    :+:   */
+/*   ops_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomamart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 17:50:36 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/05 17:50:38 by tomamart         ###   ########.fr       */
+/*   Created: 2025/12/05 17:51:25 by tomamart          #+#    #+#             */
+/*   Updated: 2025/12/05 17:51:29 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	has_duplicates(t_stack *a)
+void	op_ra(t_stack *a)
 {
-	t_node	*i;
-	t_node	*j;
-
-	i = a->top;
-	while (i)
-	{
-		j = i->next;
-		while (j)
-		{
-			if (j->value == i->value)
-				return (1);
-			j = j->next;
-		}
-		i = i->next;
-	}
-	return (0);
+	rotate(a);
+	putstr("ra\n");
 }
 
-int	already_sorted(t_stack *a)
+void	op_rb(t_stack *b)
 {
-	t_node	*n;
+	rotate(b);
+	putstr("rb\n");
+}
 
-	n = a->top;
-	while (n && n->next)
-	{
-		if (n->value > n->next->value)
-			return (0);
-		n = n->next;
-	}
-	return (1);
+void	op_rr(t_stack *a, t_stack *b)
+{
+	rotate(a);
+	rotate(b);
+	putstr("rr\n");
 }

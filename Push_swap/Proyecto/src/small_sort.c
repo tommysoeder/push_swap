@@ -1,67 +1,112 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   small_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tomamart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/26 16:00:19 by tomamart          #+#    #+#             */
+/*   Updated: 2025/11/26 16:00:22 by tomamart         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static int top_v(t_stack *a) { return a->top->value; }
-static int mid_v(t_stack *a) { return a->top->next->value; }
-static int bot_v(t_stack *a) { return a->bottom->value; }
-
-void sort_2(t_stack *a)
+void	sort_2(t_stack *a)
 {
-	if (a->size == 2 && top_v(a) > mid_v(a))
+	if (a->size == 2 && a->top->value > a->top->next->value)
 		op_sa(a);
 }
 
-void sort_3(t_stack *a)
+void	sort_3(t_stack *a)
 {
-	int A = top_v(a), B = mid_v(a), C = bot_v(a);
+	int	v1;
+	int	v2;
+	int	v3;
 
-	if (A < B && B < C) return;
-	if (A > B && B < C && A < C) op_sa(a);                
-	else if (A > B && B > C) { op_sa(a); op_rra(a); }     
-	else if (A > B && B < C && A > C) op_ra(a);           
-	else if (A < B && B > C && A < C) { op_sa(a); op_ra(a);} 
-	else if (A < B && B > C && A > C) op_rra(a);           
-}
-
-int find_min_pos(t_stack *a)
-{
-	int pos = 0, best_pos = 0;
-	int best = a->top->value;
-	for (t_node *n = a->top; n; n = n->next, ++pos)
+	v1 = a->top->value;
+	v2 = a->top->next->value;
+	v3 = a->bottom->value;
+	if (v1 < v2 && v2 < v3)
+		return ;
+	if (v1 > v2 && v2 < v3 && v1 < v3)
+		op_sa(a);
+	else if (v1 > v2 && v2 > v3)
 	{
-		if (n->value < best) { best = n->value; best_pos = pos; }
+		op_sa(a);
+		op_rra(a);
 	}
-	return best_pos;
+	else if (v1 > v2 && v2 < v3 && v1 > v3)
+		op_ra(a);
+	else if (v1 < v2 && v2 > v3 && v1 < v3)
+	{
+		op_sa(a);
+		op_ra(a);
+	}
+	else if (v1 < v2 && v2 > v3 && v1 > v3)
+		op_rra(a);
 }
 
-void rotate_pos_to_top(t_stack *a, int pos)
+int	find_min_pos(t_stack *a)
 {
+	int		pos;
+	int		best_pos;
+	int		best;
+	t_node	*node;
+
+	pos = 0;
+	best_pos = 0;
+	node = a->top;
+	best = node->value;
+	while (node)
+	{
+		if (node->value < best)
+		{
+			best = node->value;
+			best_pos = pos;
+		}
+		node = node->next;
+		pos++;
+	}
+	return (best_pos);
+}
+
+void	rotate_pos_to_top(t_stack *a, int pos)
+{
+	int	steps;
+
 	if (pos <= a->size / 2)
-		while (pos-- > 0) op_ra(a);
+	{
+		while (pos > 0)
+		{
+			op_ra(a);
+			pos--;
+		}
+	}
 	else
 	{
-		int steps = a->size - pos;
-		while (steps-- > 0) op_rra(a);
+		steps = a->size - pos;
+		while (steps > 0)
+		{
+			op_rra(a);
+			steps--;
+		}
 	}
 }
 
-void sort_5(t_stack *a, t_stack *b)
+void	sort_5(t_stack *a, t_stack *b)
 {
-	int pos;
+	int	pos;
 
 	pos = find_min_pos(a);
 	rotate_pos_to_top(a, pos);
 	op_pb(a, b);
-
 	pos = find_min_pos(a);
 	rotate_pos_to_top(a, pos);
 	op_pb(a, b);
-
-
 	sort_3(a);
-
 	if (b->size == 2 && b->top->value < b->top->next->value)
 		op_sb(b);
-
 	op_pa(a, b);
 	op_pa(a, b);
 }

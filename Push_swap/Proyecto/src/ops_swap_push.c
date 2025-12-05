@@ -1,47 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checks.c                                           :+:      :+:    :+:   */
+/*   ops_swap_push.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomamart <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 17:50:36 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/05 17:50:38 by tomamart         ###   ########.fr       */
+/*   Created: 2025/12/05 17:51:44 by tomamart          #+#    #+#             */
+/*   Updated: 2025/12/05 17:51:46 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	has_duplicates(t_stack *a)
+void	op_sa(t_stack *a)
 {
-	t_node	*i;
-	t_node	*j;
-
-	i = a->top;
-	while (i)
-	{
-		j = i->next;
-		while (j)
-		{
-			if (j->value == i->value)
-				return (1);
-			j = j->next;
-		}
-		i = i->next;
-	}
-	return (0);
+	swap_top(a);
+	putstr("sa\n");
 }
 
-int	already_sorted(t_stack *a)
+void	op_sb(t_stack *b)
 {
-	t_node	*n;
+	swap_top(b);
+	putstr("sb\n");
+}
 
-	n = a->top;
-	while (n && n->next)
-	{
-		if (n->value > n->next->value)
-			return (0);
-		n = n->next;
-	}
-	return (1);
+void	op_ss(t_stack *a, t_stack *b)
+{
+	swap_top(a);
+	swap_top(b);
+	putstr("ss\n");
+}
+
+void	op_pa(t_stack *a, t_stack *b)
+{
+	push_from_to(b, a);
+	putstr("pa\n");
+}
+
+void	op_pb(t_stack *a, t_stack *b)
+{
+	push_from_to(a, b);
+	putstr("pb\n");
 }
