@@ -3,20 +3,21 @@ CC          := cc
 CFLAGS      := -Wall -Wextra -Werror
 INCS        := -Iinclude
 
-SRC         := src/main.c \
-               src/stack_init.c \
-               src/stack_ops_basic.c \
-               src/parse.c \
-               src/checks.c \
-			   src/small_sort.c \
-       		   src/sort_radix.c \
-			   src/ps_atol.c \
-			   src/ops_utils.c \
-			   src/ops_swap_push.c \
-			   src/ops_rotate.c \
-    		   src/ops_reverse_rotate.c \
-			   src/split_ws.c \
-			   src/run_sort.c \
+SRC := src/main.c \
+       src/stack_init.c \
+       src/stack_ops_basic.c \
+       src/parse.c \
+       src/split_ws.c \
+       src/ps_atol.c \
+       src/checks.c \
+       src/ops_utils.c \
+       src/ops_swap_push.c \
+       src/ops_rotate.c \
+       src/ops_reverse_rotate.c \
+       src/small_sort.c \
+       src/radix_utils.c \
+       src/sort_radix.c \
+	   src/split_utils.c \
 
 OBJ         := $(SRC:.c=.o)
 

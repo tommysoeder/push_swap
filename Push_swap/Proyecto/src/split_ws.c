@@ -3,27 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   split_ws.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomamart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomamart <tomamart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:52:41 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/05 17:52:44 by tomamart         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:47:59 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-typedef struct s_split
-{
-	int		i;
-	int		count;
-	int		start;
-	char	**vec;
-}	t_split;
-
 static int	is_space(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\r' || c == '\v' || c == '\f');
+}
+
+static int	count_tokens(const char *s)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while (s[i])
+	{
+		while (s[i] && is_space(s[i]))
+			i++;
+		if (!s[i])
+			break ;
+		n++;
+		while (s[i] && !is_space(s[i]))
+			i++;
+	}
+	return (n);
 }
 
 static char	*substr_dup(const char *s, int start, int len)
@@ -44,82 +56,49 @@ static char	*substr_dup(const char *s, int start, int len)
 	return (out);
 }
 
-void	free_split(char **v)
+static int	fill_tokens(const char *s, char **vec)
 {
-	int	i;
-
-	if (!v)
-		return ;
-	i = 0;
-	while (v[i])
-	{
-		free(v[i]);
-		i++;
-	}
-	free(v);
-}
-
-static int	add_token(t_split *st, const char *s)
-{
+	int		i;
+	int		tok_i;
+	int		start;
 	char	*tok;
-	char	**tmp;
-	int		len;
-	int		j;
 
-	len = st->i - st->start;
-	tok = substr_dup(s, st->start, len);
-	if (!tok)
-		return (0);
-	tmp = malloc(sizeof(char *) * (st->count + 2));
-	if (!tmp)
+	i = 0;
+	tok_i = 0;
+	while (s[i])
 	{
-		free(tok);
-		return (0);
+		while (s[i] && is_space(s[i]))
+			i++;
+		if (!s[i])
+			break ;
+		start = i;
+		while (s[i] && !is_space(s[i]))
+			i++;
+		tok = substr_dup(s, start, i - start);
+		if (!tok)
+			return (0);
+		vec[tok_i] = tok;
+		tok_i++;
 	}
-	j = 0;
-	while (j < st->count)
-	{
-		tmp[j] = st->vec[j];
-		j++;
-	}
-	tmp[st->count] = tok;
-	tmp[st->count + 1] = NULL;
-	free(st->vec);
-	st->vec = tmp;
-	st->count++;
+	vec[tok_i] = NULL;
 	return (1);
 }
 
 char	**split_ws(const char *s, int *count)
 {
-	t_split	st;
+	int		n;
+	char	**vec;
 
-	st.i = 0;
-	st.count = 0;
-	st.vec = NULL;
-	while (s[st.i])
+	n = count_tokens(s);
+	vec = malloc(sizeof(char *) * (n + 1));
+	if (!vec)
+		return (NULL);
+	if (!fill_tokens(s, vec))
 	{
-		while (s[st.i] && is_space(s[st.i]))
-			st.i++;
-		if (!s[st.i])
-			break ;
-		st.start = st.i;
-		while (s[st.i] && !is_space(s[st.i]))
-			st.i++;
-		if (!add_token(&st, s))
-		{
-			free_split(st.vec);
-			return (NULL);
-		}
-	}
-	if (!st.vec)
-	{
-		st.vec = malloc(sizeof(char *));
-		if (!st.vec)
-			return (NULL);
-		st.vec[0] = NULL;
+		free_split(vec);
+		return (NULL);
 	}
 	if (count)
-		*count = st.count;
-	return (st.vec);
+		*count = n;
+	return (vec);
 }

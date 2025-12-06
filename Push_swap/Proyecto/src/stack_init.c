@@ -12,9 +12,11 @@
 
 #include "push_swap.h"
 
-t_stack *stack_new(void)
+t_stack	*stack_new(void)
 {
-	t_stack *s = (t_stack *)malloc(sizeof(t_stack));
+	t_stack	*s;
+
+	s = (t_stack *)malloc(sizeof(t_stack));
 	if (!s)
 		return (NULL);
 	s->top = NULL;
@@ -23,9 +25,11 @@ t_stack *stack_new(void)
 	return (s);
 }
 
-t_node *node_new(int v)
+t_node	*node_new(int v)
 {
-	t_node *n = (t_node *)malloc(sizeof(t_node));
+	t_node	*n;
+
+	n = (t_node *)malloc(sizeof(t_node));
 	if (!n)
 		return (NULL);
 	n->value = v;
@@ -34,10 +38,10 @@ t_node *node_new(int v)
 	return (n);
 }
 
-void stack_clear(t_stack **s)
+void	stack_clear(t_stack **s)
 {
-	t_node *cur;
-	t_node *next;
+	t_node	*cur;
+	t_node	*next;
 
 	if (!s || !*s)
 		return ;

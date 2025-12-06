@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void push_front(t_stack *s, t_node *n)
+void	push_front(t_stack *s, t_node *n)
 {
 	if (!s || !n)
 		return ;
@@ -30,7 +30,7 @@ void push_front(t_stack *s, t_node *n)
 	s->size++;
 }
 
-void push_back(t_stack *s, t_node *n)
+void	push_back(t_stack *s, t_node *n)
 {
 	if (!s || !n)
 		return ;
@@ -48,9 +48,9 @@ void push_back(t_stack *s, t_node *n)
 	s->size++;
 }
 
-t_node *pop_front(t_stack *s)
+t_node	*pop_front(t_stack *s)
 {
-	t_node *n;
+	t_node	*n;
 
 	if (!s || s->size == 0)
 		return (NULL);
@@ -66,9 +66,9 @@ t_node *pop_front(t_stack *s)
 	return (n);
 }
 
-t_node *pop_back(t_stack *s)
+t_node	*pop_back(t_stack *s)
 {
-	t_node *n;
+	t_node	*n;
 
 	if (!s || s->size == 0)
 		return (NULL);
