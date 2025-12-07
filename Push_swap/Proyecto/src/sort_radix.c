@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	max_bits(t_stack *a)
+static int	ft_max_bits(t_stack *a)
 {
 	t_node	*n;
 	int		max;
@@ -32,14 +32,14 @@ static int	max_bits(t_stack *a)
 	return (bits);
 }
 
-void	sort_radix(t_stack *a, t_stack *b)
+void	ft_sort_radix(t_stack *a, t_stack *b)
 {
 	int	i;
 	int	bits;
 	int	count;
 	int	value;
 
-	bits = max_bits(a);
+	bits = ft_max_bits(a);
 	i = 0;
 	while (i < bits)
 	{
@@ -48,13 +48,13 @@ void	sort_radix(t_stack *a, t_stack *b)
 		{
 			value = a->top->value;
 			if (((value >> i) & 1) == 0)
-				op_pb(a, b);
+				ft_op_pb(a, b);
 			else
-				op_ra(a);
+				ft_op_ra(a);
 			count--;
 		}
 		while (b->size > 0)
-			op_pa(a, b);
+			ft_op_pa(a, b);
 		i++;
 	}
 }

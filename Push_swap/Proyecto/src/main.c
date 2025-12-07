@@ -12,20 +12,20 @@
 
 #include "push_swap.h"
 
-static void	run_sort(t_stack *a, t_stack *b)
+static void	ft_run_sort(t_stack *a, t_stack *b)
 {
-	if (already_sorted(a))
+	if (ft_already_sorted(a))
 		return ;
 	if (a->size == 2)
-		sort_2(a);
+		ft_sort_2(a);
 	else if (a->size == 3)
-		sort_3(a);
+		ft_sort_3(a);
 	else if (a->size <= 5)
-		sort_5(a, b);
+		ft_sort_5(a, b);
 	else
 	{
-		index_compress(a);
-		sort_radix(a, b);
+		ft_index_compress(a);
+		ft_sort_radix(a, b);
 	}
 }
 
@@ -36,14 +36,14 @@ int	main(int argc, char **argv)
 
 	if (argc <= 1)
 		return (0);
-	a = stack_new();
-	b = stack_new();
+	a = ft_stack_new();
+	b = ft_stack_new();
 	if (!a || !b)
-		ps_error_and_exit(a, b);
-	if (!parse_args_into_stack(a, argc, argv))
-		ps_error_and_exit(a, b);
-	run_sort(a, b);
-	stack_clear(&a);
-	stack_clear(&b);
+		ft_ps_error_and_exit(a, b);
+	if (!ft_parse_args_into_stack(a, argc, argv))
+		ft_ps_error_and_exit(a, b);
+	ft_run_sort(a, b);
+	ft_stack_clear(&a);
+	ft_stack_clear(&b);
 	return (0);
 }

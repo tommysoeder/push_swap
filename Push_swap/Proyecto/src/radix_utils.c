@@ -6,13 +6,13 @@
 /*   By: tomamart <tomamart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 18:59:52 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/06 19:11:31 by tomamart         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:47:08 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	*copy_to_array(t_stack *a)
+static int	*ft_copy_to_array(t_stack *a)
 {
 	int		*arr;
 	int		i;
@@ -32,7 +32,7 @@ static int	*copy_to_array(t_stack *a)
 	return (arr);
 }
 
-static void	sort_int_array(int *arr, int n)
+static void	ft_sort_int_array(int *arr, int n)
 {
 	int	i;
 	int	j;
@@ -60,7 +60,7 @@ static void	sort_int_array(int *arr, int n)
 	}
 }
 
-static int	find_index(int *sorted, int n, int value)
+static int	ft_find_index(int *sorted, int n, int value)
 {
 	int	i;
 
@@ -74,21 +74,21 @@ static int	find_index(int *sorted, int n, int value)
 	return (-1);
 }
 
-static int	*build_sorted_array(t_stack *a, int *n)
+static int	*ft_build_sorted_array(t_stack *a, int *n)
 {
 	int		*arr;
 	int		*sorted;
 	int		i;
 
 	*n = a->size;
-	arr = copy_to_array(a);
+	arr = ft_copy_to_array(a);
 	if (!arr)
-		ps_error_and_exit(a, NULL);
+		ft_ps_error_and_exit(a, NULL);
 	sorted = malloc(sizeof(int) * (*n));
 	if (!sorted)
 	{
 		free(arr);
-		ps_error_and_exit(a, NULL);
+	ft_ps_error_and_exit(a, NULL);
 	}
 	i = 0;
 	while (i < *n)
@@ -97,21 +97,21 @@ static int	*build_sorted_array(t_stack *a, int *n)
 		i++;
 	}
 	free(arr);
-	sort_int_array(sorted, *n);
+	ft_sort_int_array(sorted, *n);
 	return (sorted);
 }
 
-void	index_compress(t_stack *a)
+void	ft_index_compress(t_stack *a)
 {
 	int		n;
 	int		*sorted;
 	t_node	*node;
 
-	sorted = build_sorted_array(a, &n);
+	sorted = ft_build_sorted_array(a, &n);
 	node = a->top;
 	while (node)
 	{
-		node->value = find_index(sorted, n, node->value);
+		node->value = ft_find_index(sorted, n, node->value);
 		node = node->next;
 	}
 	free(sorted);

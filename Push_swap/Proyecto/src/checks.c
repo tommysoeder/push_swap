@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomamart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomamart <tomamart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:50:36 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/05 17:50:38 by tomamart         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:29:34 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	has_duplicates(t_stack *a)
+int	ft_has_duplicates(t_stack *a)
 {
 	t_node	*i;
 	t_node	*j;
@@ -32,7 +32,7 @@ int	has_duplicates(t_stack *a)
 	return (0);
 }
 
-int	already_sorted(t_stack *a)
+int	ft_already_sorted(t_stack *a)
 {
 	t_node	*n;
 

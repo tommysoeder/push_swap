@@ -12,13 +12,13 @@
 
 #include "push_swap.h"
 
-void	sort_2(t_stack *a)
+void	ft_sort_2(t_stack *a)
 {
 	if (a->size == 2 && a->top->value > a->top->next->value)
-		op_sa(a);
+	ft_op_sa(a);
 }
 
-void	sort_3(t_stack *a)
+void	ft_sort_3(t_stack *a)
 {
 	int	v1;
 	int	v2;
@@ -30,24 +30,24 @@ void	sort_3(t_stack *a)
 	if (v1 < v2 && v2 < v3)
 		return ;
 	if (v1 > v2 && v2 < v3 && v1 < v3)
-		op_sa(a);
+		ft_op_sa(a);
 	else if (v1 > v2 && v2 > v3)
 	{
-		op_sa(a);
-		op_rra(a);
+		ft_op_sa(a);
+		ft_op_rra(a);
 	}
 	else if (v1 > v2 && v2 < v3 && v1 > v3)
-		op_ra(a);
+		ft_op_ra(a);
 	else if (v1 < v2 && v2 > v3 && v1 < v3)
 	{
-		op_sa(a);
-		op_ra(a);
+		ft_op_sa(a);
+		ft_op_ra(a);
 	}
 	else if (v1 < v2 && v2 > v3 && v1 > v3)
-		op_rra(a);
+		ft_op_rra(a);
 }
 
-int	find_min_pos(t_stack *a)
+int	ft_find_min_pos(t_stack *a)
 {
 	int		pos;
 	int		best_pos;
@@ -71,7 +71,7 @@ int	find_min_pos(t_stack *a)
 	return (best_pos);
 }
 
-void	rotate_pos_to_top(t_stack *a, int pos)
+void	ft_rotate_pos_to_top(t_stack *a, int pos)
 {
 	int	steps;
 
@@ -79,7 +79,7 @@ void	rotate_pos_to_top(t_stack *a, int pos)
 	{
 		while (pos > 0)
 		{
-			op_ra(a);
+			ft_op_ra(a);
 			pos--;
 		}
 	}
@@ -88,25 +88,36 @@ void	rotate_pos_to_top(t_stack *a, int pos)
 		steps = a->size - pos;
 		while (steps > 0)
 		{
-			op_rra(a);
+			ft_op_rra(a);
 			steps--;
 		}
 	}
 }
 
-void	sort_5(t_stack *a, t_stack *b)
+void	ft_sort_5(t_stack *a, t_stack *b)
 {
 	int	pos;
 
-	pos = find_min_pos(a);
-	rotate_pos_to_top(a, pos);
-	op_pb(a, b);
-	pos = find_min_pos(a);
-	rotate_pos_to_top(a, pos);
-	op_pb(a, b);
-	sort_3(a);
-	if (b->size == 2 && b->top->value < b->top->next->value)
-		op_sb(b);
-	op_pa(a, b);
-	op_pa(a, b);
+	if (a->size == 4)
+	{
+		pos = ft_find_min_pos(a);
+		ft_rotate_pos_to_top(a, pos);
+		ft_op_pb(a, b);
+		ft_sort_3(a);
+		ft_op_pa(a, b);
+	}
+	else if (a->size == 5)
+	{
+		pos = ft_find_min_pos(a);
+		ft_rotate_pos_to_top(a, pos);
+		ft_op_pb(a, b);
+		pos = ft_find_min_pos(a);
+		ft_rotate_pos_to_top(a, pos);
+		ft_op_pb(a, b);
+		ft_sort_3(a);
+		if (b->size == 2 && b->top->value < b->top->next->value)
+			ft_op_sb(b);
+		ft_op_pa(a, b);
+		ft_op_pa(a, b);
+	}
 }

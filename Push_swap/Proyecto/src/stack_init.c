@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_stack	*stack_new(void)
+t_stack	*ft_stack_new(void)
 {
 	t_stack	*s;
 
@@ -25,7 +25,7 @@ t_stack	*stack_new(void)
 	return (s);
 }
 
-t_node	*node_new(int v)
+t_node	*ft_node_new(int v)
 {
 	t_node	*n;
 
@@ -38,7 +38,7 @@ t_node	*node_new(int v)
 	return (n);
 }
 
-void	stack_clear(t_stack **s)
+void	ft_stack_clear(t_stack **s)
 {
 	t_node	*cur;
 	t_node	*next;

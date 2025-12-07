@@ -6,19 +6,19 @@
 /*   By: tomamart <tomamart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:52:41 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/06 19:47:59 by tomamart         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:47:07 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_space(char c)
+static int	ft_is_space(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n'
 		|| c == '\r' || c == '\v' || c == '\f');
 }
 
-static int	count_tokens(const char *s)
+static int	ft_count_tokens(const char *s)
 {
 	int	i;
 	int	n;
@@ -27,18 +27,18 @@ static int	count_tokens(const char *s)
 	n = 0;
 	while (s[i])
 	{
-		while (s[i] && is_space(s[i]))
+		while (s[i] && ft_is_space(s[i]))
 			i++;
 		if (!s[i])
 			break ;
 		n++;
-		while (s[i] && !is_space(s[i]))
+		while (s[i] && !ft_is_space(s[i]))
 			i++;
 	}
 	return (n);
 }
 
-static char	*substr_dup(const char *s, int start, int len)
+static char	*ft_substr_dup(const char *s, int start, int len)
 {
 	char	*out;
 	int		i;
@@ -56,7 +56,7 @@ static char	*substr_dup(const char *s, int start, int len)
 	return (out);
 }
 
-static int	fill_tokens(const char *s, char **vec)
+static int	ft_fill_tokens(const char *s, char **vec)
 {
 	int		i;
 	int		tok_i;
@@ -67,14 +67,14 @@ static int	fill_tokens(const char *s, char **vec)
 	tok_i = 0;
 	while (s[i])
 	{
-		while (s[i] && is_space(s[i]))
+		while (s[i] && ft_is_space(s[i]))
 			i++;
 		if (!s[i])
 			break ;
 		start = i;
-		while (s[i] && !is_space(s[i]))
+		while (s[i] && !ft_is_space(s[i]))
 			i++;
-		tok = substr_dup(s, start, i - start);
+		tok = ft_substr_dup(s, start, i - start);
 		if (!tok)
 			return (0);
 		vec[tok_i] = tok;
@@ -84,18 +84,18 @@ static int	fill_tokens(const char *s, char **vec)
 	return (1);
 }
 
-char	**split_ws(const char *s, int *count)
+char	**ft_split_ws(const char *s, int *count)
 {
 	int		n;
 	char	**vec;
 
-	n = count_tokens(s);
+	n = ft_count_tokens(s);
 	vec = malloc(sizeof(char *) * (n + 1));
 	if (!vec)
 		return (NULL);
-	if (!fill_tokens(s, vec))
+	if (!ft_fill_tokens(s, vec))
 	{
-		free_split(vec);
+		ft_free_split(vec);
 		return (NULL);
 	}
 	if (count)

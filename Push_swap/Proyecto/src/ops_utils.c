@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ops_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomamart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomamart <tomamart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:52:00 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/05 17:52:03 by tomamart         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:28:58 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	putstr(const char *s)
+void	ft_putstr(const char *s)
 {
 	int	len;
 
@@ -22,7 +22,7 @@ void	putstr(const char *s)
 	write(1, s, len);
 }
 
-void	swap_top(t_stack *s)
+void	ft_swap_top(t_stack *s)
 {
 	t_node	*a;
 	t_node	*b;
@@ -44,29 +44,29 @@ void	swap_top(t_stack *s)
 		s->bottom = a;
 }
 
-void	push_from_to(t_stack *src, t_stack *dst)
+void	ft_push_from_to(t_stack *src, t_stack *dst)
 {
 	t_node	*n;
 
-	n = pop_front(src);
+	n = ft_pop_front(src);
 	if (n)
-		push_front(dst, n);
+		ft_push_front(dst, n);
 }
 
-void	rotate(t_stack *s)
+void	ft_rotate(t_stack *s)
 {
 	t_node	*n;
 
-	n = pop_front(s);
+	n = ft_pop_front(s);
 	if (n)
-		push_back(s, n);
+		ft_push_back(s, n);
 }
 
-void	reverse_rotate(t_stack *s)
+void	ft_reverse_rotate(t_stack *s)
 {
 	t_node	*n;
 
-	n = pop_back(s);
+	n = ft_pop_back(s);
 	if (n)
-		push_front(s, n);
+		ft_push_front(s, n);
 }

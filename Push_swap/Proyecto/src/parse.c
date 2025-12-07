@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	process_tokens(t_stack *a, char **toks, int tokc)
+static int	ft_process_tokens(t_stack *a, char **toks, int tokc)
 {
 	int		t;
 	int		ok;
@@ -22,19 +22,19 @@ static int	process_tokens(t_stack *a, char **toks, int tokc)
 	t = 0;
 	while (t < tokc)
 	{
-		num = ps_atol_strict(toks[t], &ok);
+	num = ft_ps_atol_strict(toks[t], &ok);
 		if (!ok)
 			return (0);
-		n = node_new((int)num);
+	n = ft_node_new((int)num);
 		if (!n)
 			return (0);
-		push_back(a, n);
+	ft_push_back(a, n);
 		t++;
 	}
 	return (1);
 }
 
-int	parse_args_into_stack(t_stack *a, int argc, char **argv)
+int	ft_parse_args_into_stack(t_stack *a, int argc, char **argv)
 {
 	int		i;
 	int		tokc;
@@ -43,21 +43,21 @@ int	parse_args_into_stack(t_stack *a, int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		toks = split_ws(argv[i], &tokc);
+		toks = ft_split_ws(argv[i], &tokc);
 		if (!toks || tokc == 0)
 		{
-			free_split(toks);
+			ft_free_split(toks);
 			return (0);
 		}
-		if (!process_tokens(a, toks, tokc))
+		if (!ft_process_tokens(a, toks, tokc))
 		{
-			free_split(toks);
+			ft_free_split(toks);
 			return (0);
 		}
-		free_split(toks);
+		ft_free_split(toks);
 		i++;
 	}
-	if (has_duplicates(a))
+	if (ft_has_duplicates(a))
 		return (0);
 	return (1);
 }

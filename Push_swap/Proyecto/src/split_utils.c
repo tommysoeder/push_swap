@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomamart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomamart <tomamart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 19:45:49 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/06 19:45:51 by tomamart         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:29:08 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_split(char **v)
+void	ft_free_split(char **v)
 {
 	int	i;
 

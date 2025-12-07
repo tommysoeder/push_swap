@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ops_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomamart <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tomamart <tomamart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:51:25 by tomamart          #+#    #+#             */
-/*   Updated: 2025/12/05 17:51:29 by tomamart         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:29:35 by tomamart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	op_ra(t_stack *a)
+void	ft_op_ra(t_stack *a)
 {
-	rotate(a);
-	putstr("ra\n");
+	ft_rotate(a);
+	ft_putstr("ra\n");
 }
 
-void	op_rb(t_stack *b)
+void	ft_op_rb(t_stack *b)
 {
-	rotate(b);
-	putstr("rb\n");
+	ft_rotate(b);
+	ft_putstr("rb\n");
 }
 
-void	op_rr(t_stack *a, t_stack *b)
+void	ft_op_rr(t_stack *a, t_stack *b)
 {
-	rotate(a);
-	rotate(b);
-	putstr("rr\n");
+	ft_rotate(a);
+	ft_rotate(b);
+	ft_putstr("rr\n");
 }
